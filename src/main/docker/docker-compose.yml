@@ -1,0 +1,39 @@
+version: '3.9'
+services:
+  keycloak:
+    image: quay.io/keycloak/keycloak:24.0
+    command: ["start-dev", "--import-realm"]
+    environment:
+      KC_DB: dev-mem
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+    volumes:
+      - ./keycloak/realm-export.json:/opt/keycloak/data/import/realm-export.json
+    ports: ["8081:8080"]
+
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: app
+      POSTGRES_PASSWORD: app
+      POSTGRES_DB: escola
+      QUARKUS_HIBERNATE_ORM_DATABASE_GENERATION: update
+    ports: ["5432:5432"]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U app -d escola"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  backend:
+    build:
+      # O contexto de build é a raiz do projeto Quarkus
+      context: ../../..
+      # O Dockerfile está localizado dentro de src/main/docker
+      dockerfile: src/main/docker/Dockerfile.jvm
+    environment:
+      QUARKUS_DATASOURCE_JDBC_URL: jdbc:postgresql://db:5432/escola
+      QUARKUS_OIDC_AUTH_SERVER_URL: http://keycloak:8080/realms/escola
+    depends_on: [db, keycloak]
+    ports: ["8080:8080"]
+
