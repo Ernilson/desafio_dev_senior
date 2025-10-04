@@ -17,7 +17,7 @@ public class MatrizCurricularService {
     public List<MatrizCurricular> list(Integer page, Integer size, Long cursoId, Long semestreId, Boolean ativa) {
         StringBuilder jpql = new StringBuilder("1=1");
         new Object() { int i = 0; };
-        // Monta dinamicamente
+
         if (cursoId != null) jpql.append(" and curso.id = ").append(cursoId);
         if (semestreId != null) jpql.append(" and semestre.id = ").append(semestreId);
         if (ativa != null) jpql.append(" and ativa = ").append(ativa);
@@ -37,10 +37,8 @@ public class MatrizCurricularService {
 
     @Transactional
     public MatrizCurricular create(Long cursoId, Long semestreId, Boolean ativa) {
-        // idempotente por (curso, semestre)
         Optional<MatrizCurricular> existente = findByCursoSemestre(cursoId, semestreId);
         if (existente.isPresent()) {
-            // se quiser, atualize o flag 'ativa'
             if (ativa != null) {
                 existente.get().ativa = ativa;
             }
@@ -72,7 +70,6 @@ public class MatrizCurricularService {
             m.semestre = s;
         }
         if (ativa != null) m.ativa = ativa;
-        // Panache realiza dirty-checking
         return m;
     }
 
