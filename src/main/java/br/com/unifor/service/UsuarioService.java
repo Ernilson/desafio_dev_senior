@@ -26,10 +26,13 @@ public class UsuarioService {
     @Transactional
     public Usuario atualizarUsuario(Long id, Usuario dadosUsuario) {
         Usuario usuarioExistente = buscarPorId(id);
-
-        if (usuarioExistente != null) {
-           //
+        if (usuarioExistente == null) {
+            throw new IllegalArgumentException("Usuário com ID " + id + " não encontrado.");
         }
+        usuarioExistente.setNome(dadosUsuario.getNome());
+        usuarioExistente.setEmail(dadosUsuario.getEmail());
+        usuarioExistente.setRole(dadosUsuario.getRole());
+        usuarioExistente.persist();
 
         return usuarioExistente;
     }
