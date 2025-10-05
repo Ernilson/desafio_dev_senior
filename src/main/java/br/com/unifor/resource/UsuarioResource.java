@@ -2,6 +2,7 @@ package br.com.unifor.resource;
 
 import br.com.unifor.entity.Usuario;
 import br.com.unifor.service.UsuarioService;
+import jakarta.annotation.security.PermitAll;
 import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.validation.Valid;
@@ -10,7 +11,7 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import java.util.List;
 
-@Path("/api/usuarios")
+@Path("/usuarios")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class UsuarioResource {
@@ -19,6 +20,7 @@ public class UsuarioResource {
     UsuarioService usuarioService;
 
     @GET
+    @PermitAll
     public List<Usuario> listarTodos() {
         return Usuario.listAll();
     }
@@ -31,7 +33,8 @@ public class UsuarioResource {
 
     @GET
     @Path("/{id}")
-    @RolesAllowed({"admin", "coordenador"})
+    @PermitAll
+    //@RolesAllowed({"admin", "coordenador"})
     public Response buscarPorId(@PathParam("id") Long id) {
         Usuario usuario = usuarioService.buscarPorId(id);
         if (usuario != null) {
