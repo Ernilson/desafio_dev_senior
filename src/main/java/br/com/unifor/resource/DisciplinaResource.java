@@ -12,7 +12,7 @@ import jakarta.ws.rs.core.*;
 import java.net.URI;
 import java.util.List;
 
-@Path("/api/disciplinas")
+@Path("/disciplinas")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class DisciplinaResource {
