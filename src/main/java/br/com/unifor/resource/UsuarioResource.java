@@ -20,7 +20,6 @@ public class UsuarioResource {
     UsuarioService usuarioService;
 
     @GET
-    @PermitAll
     public List<Usuario> listarTodos() {
         return Usuario.listAll();
     }
@@ -33,8 +32,6 @@ public class UsuarioResource {
 
     @GET
     @Path("/{id}")
-    @PermitAll
-    //@RolesAllowed({"admin", "coordenador"})
     public Response buscarPorId(@PathParam("id") Long id) {
         Usuario usuario = usuarioService.buscarPorId(id);
         if (usuario != null) {
@@ -45,7 +42,6 @@ public class UsuarioResource {
 
     @PUT
     @Path("/{id}")
-    @RolesAllowed({"admin"})
     public Response atualizar(@PathParam("id") Long id, @Valid Usuario usuario) {
         Usuario usuarioAtualizado = usuarioService.atualizarUsuario(id, usuario);
         if (usuarioAtualizado != null) {
@@ -56,7 +52,6 @@ public class UsuarioResource {
 
     @DELETE
     @Path("/{id}")
-    @RolesAllowed({"admin"})
     public Response deletar(@PathParam("id") Long id) {
         if (usuarioService.deletarUsuario(id)) {
             return Response.noContent().build(); // 204 No Content

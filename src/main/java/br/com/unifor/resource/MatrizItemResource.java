@@ -13,7 +13,7 @@ import jakarta.ws.rs.core.UriInfo;
 import java.net.URI;
 import java.util.List;
 
-@Path("/api/matriz-itens")
+@Path("/matriz-itens")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class MatrizItemResource {

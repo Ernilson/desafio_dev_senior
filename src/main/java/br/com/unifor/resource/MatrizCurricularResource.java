@@ -10,7 +10,7 @@ import jakarta.ws.rs.core.*;
 import java.net.URI;
 import java.util.List;
 
-@Path("/api/matrizes")
+@Path("/matrizes")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class MatrizCurricularResource {

@@ -9,7 +9,7 @@ import jakarta.ws.rs.core.MediaType;
 import io.quarkus.security.identity.SecurityIdentity;
 import jakarta.annotation.security.RolesAllowed;
 
-@Path("/api/me")
+@Path("/me")
 @Produces(MediaType.APPLICATION_JSON)
 public class PerfilResource {
 
@@ -18,7 +18,6 @@ public class PerfilResource {
 
     @GET
     @PermitAll
-    //@RolesAllowed({"ALUNO", "PROFESSOR", "COORDENADOR", "ADMINISTRADOR"}) // Protege o endpoint
     public UserProfile getMeuPerfil() {
         // Pega o ID único do usuário (geralmente o 'sub' do token JWT)
         String userId = securityIdentity.getPrincipal().getName();
