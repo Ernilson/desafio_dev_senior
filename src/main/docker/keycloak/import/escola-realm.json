@@ -42,6 +42,42 @@
       "credentials": [
         { "type": "password", "value": "admin", "temporary": false }
       ]
+    },
+    {
+      "username": "User Coord",
+      "enabled": true,
+      "email": "coord@local.com",
+      "firstName": "Coord",
+      "lastName": "Local",
+      "emailVerified": true,
+      "realmRoles": ["coordenador"],
+      "credentials": [
+        { "type": "password", "value": "admin", "temporary": false }
+      ]
+    },
+    {
+      "username": "User Prof",
+      "enabled": true,
+      "email": "prof@local.com",
+      "firstName": "prof",
+      "lastName": "Local",
+      "emailVerified": true,
+      "realmRoles": ["professor"],
+      "credentials": [
+        { "type": "password", "value": "admin", "temporary": false }
+      ]
+    },
+    {
+      "username": "User Aluno",
+      "enabled": true,
+      "email": "aluno@local.com",
+      "firstName": "aluno",
+      "lastName": "Local",
+      "emailVerified": true,
+      "realmRoles": ["aluno"],
+      "credentials": [
+        { "type": "password", "value": "admin", "temporary": false }
+      ]
     }
   ]
 }

@@ -1,5 +1,6 @@
 package br.com.unifor.resource;
 
+import jakarta.annotation.security.PermitAll;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
@@ -16,7 +17,8 @@ public class PerfilResource {
     SecurityIdentity securityIdentity;
 
     @GET
-    @RolesAllowed({"ALUNO", "PROFESSOR", "COORDENADOR", "ADMINISTRADOR"}) // Protege o endpoint
+    @PermitAll
+    //@RolesAllowed({"ALUNO", "PROFESSOR", "COORDENADOR", "ADMINISTRADOR"}) // Protege o endpoint
     public UserProfile getMeuPerfil() {
         // Pega o ID único do usuário (geralmente o 'sub' do token JWT)
         String userId = securityIdentity.getPrincipal().getName();
